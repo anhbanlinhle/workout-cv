@@ -6,7 +6,7 @@ from moviepy.editor import VideoFileClip
 import moviepy.video.fx.all as vfx
 import constant
 
-def count_pushup(path):
+def process_data(path):
     md_pose = md.solutions.pose 
 
     count = 0

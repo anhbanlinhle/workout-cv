@@ -1,7 +1,7 @@
-from models import count_pushup
+from models import process_data
 
 path = "path/to/video"
 
-count = count_pushup(path)
+count = process_data(path)
 
 print(count)
