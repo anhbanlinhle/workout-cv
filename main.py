@@ -7,7 +7,7 @@ from constant import LEFT_ELBOW
 from constant import LEFT_WRIST
 
 
-path = "data/cd5.mp4"
+path = "data/cd2.mp4"
 # imlist = create_imlist(path)
 count = count_pushup_angle(path)
 print(count)

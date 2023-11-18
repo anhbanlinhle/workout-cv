@@ -60,7 +60,7 @@ def create_imlist(path):
 
 
 def count_pushup_angle(path):
-    md_pose = md.solutions.pose 
+    md_pose = md.solutions.pose  
 
     count = 0
     position = None 
@@ -91,8 +91,6 @@ def count_pushup_angle(path):
                     h, w, _ = image.shape
                     X, Y = int(lm.x * w), int(lm.y * h)
                     imlist.append([id, X, Y])
-            if len(imlist) == 0:
-                print("em")
             if len(imlist) != 0:
                 angle_SEW_left =  getAngle((imlist[LEFT_SHOULDER][1], imlist[LEFT_SHOULDER][2]),
                                         (imlist[LEFT_ELBOW][1],imlist[LEFT_ELBOW][2]),
@@ -131,34 +129,11 @@ def count_pushup_angle(path):
                     angle_HKA_right = 360 - getAngle((imlist[RIGHT_HIP][1], imlist[RIGHT_HIP][2]),
                                             (imlist[RIGHT_KNEE][1],imlist[RIGHT_KNEE][2]),
                                             (imlist[RIGHT_ANKLE][1],imlist[RIGHT_ANKLE][2]))
-                # angle_SEW_left =  getAngle((imlist[LEFT_SHOULDER][1], imlist[LEFT_SHOULDER][2]),
-                #                         (imlist[LEFT_ELBOW][1],imlist[LEFT_ELBOW][2]),
-                #                         (imlist[LEFT_WRIST][1],imlist[LEFT_WRIST][2]))
-                # angle_SEW_right =  getAngle((imlist[RIGHT_SHOULDER][1], imlist[RIGHT_SHOULDER][2]),
-                #                         (imlist[RIGHT_ELBOW][1],imlist[RIGHT_ELBOW][2]),
-                #                         (imlist[RIGHT_WRIST][1],imlist[RIGHT_WRIST][2]))
-                # angle_SHK_left = getAngle((imlist[LEFT_SHOULDER][1], imlist[LEFT_SHOULDER][2]),
-                #                         (imlist[LEFT_HIP][1],imlist[LEFT_HIP][2]),
-                #                         (imlist[LEFT_KNEE][1],imlist[LEFT_KNEE][2]))
-                # angle_SHK_right = getAngle((imlist[RIGHT_SHOULDER][1], imlist[RIGHT_SHOULDER][2]),
-                #                         (imlist[RIGHT_HIP][1],imlist[RIGHT_HIP][2]),
-                #                         (imlist[RIGHT_KNEE][1],imlist[RIGHT_KNEE][2]))
-                # angle_HKA_left = getAngle((imlist[LEFT_HIP][1], imlist[LEFT_HIP][2]),
-                #                         (imlist[LEFT_KNEE][1],imlist[LEFT_KNEE][2]),
-                #                         (imlist[LEFT_ANKLE][1],imlist[LEFT_ANKLE][2]))
-                # angle_HKA_right = getAngle((imlist[RIGHT_HIP][1], imlist[RIGHT_HIP][2]),
-                #                         (imlist[RIGHT_KNEE][1],imlist[RIGHT_KNEE][2]),
-                #                         (imlist[RIGHT_ANKLE][1],imlist[RIGHT_ANKLE][2]))
-                # angle.append(angle_left)
-                # if ((angle_right) <= constant.ANGLE_RIGHT
-                # and (angle_left) <= constant.ANGLE_LEFT):
-                #     position = "down"
-                print(angle_SEW_left)
-                print(angle_SEW_right)
+
+
                 if  ((angle_SEW_left) <= constant.SEW_THRESHOLD and (angle_SEW_right) <= constant.SEW_THRESHOLD and
                     ((angle_SHK_left) >= constant.SHK_THRESHOLD and (angle_SHK_right) >= constant.SHK_THRESHOLD) and 
                     ((angle_HKA_left) >= constant.HKA_THRESHOLD and (angle_HKA_right) >= constant.HKA_THRESHOLD) ):
-                    # print(angle_SEW_left)
                     position = "down"  
                 if (((angle_SEW_left) >= constant.SEW_THRESHOLD and (angle_SEW_right) >= constant.SEW_THRESHOLD) and
                     ((angle_SHK_left) >= constant.SHK_THRESHOLD and (angle_SHK_right) >= constant.SHK_THRESHOLD) and
