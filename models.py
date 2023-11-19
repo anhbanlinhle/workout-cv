@@ -39,7 +39,16 @@ def process_data(path):
                 md.solutions.drawing_utils.draw_landmarks(
                     image,
                     result.pose_landmarks,
-                    md_pose.POSE_CONNECTIONS
+                    md_pose.POSE_CONNECTIONS,
+                    landmark_drawing_spec = md.solutions.drawing_utils.DrawingSpec(
+                        color=(0, 0, 0), 
+                        thickness=4, 
+                        circle_radius=5
+                    ),
+                    connection_drawing_spec = md.solutions.drawing_utils.DrawingSpec(
+                        color=(255, 255, 255),
+                        thickness=4
+                    ),
                 )
 
             if len(imlist) != 0:
