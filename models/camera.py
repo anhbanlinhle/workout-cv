@@ -2,9 +2,9 @@ import cv2
 import mediapipe as md
 import constant
 
-from drawing import draw_landmarks
-from pushup import count_push_up
-from squat import count_squat
+from utils.drawing import draw_landmarks
+from models.pushup import count_push_up
+from models.squat import count_squat
 
 def process_data(path, algorithm):
     md_pose = md.solutions.pose 
