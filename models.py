@@ -1,22 +1,15 @@
 import cv2
 import mediapipe as md
-import time
-
-from moviepy.editor import VideoFileClip
-import moviepy.video.fx.all as vfx
 import constant
+from drawing import draw_landmarks
 
-def count_pushup(path):
+def process_data(path):
     md_pose = md.solutions.pose 
 
     count = 0
     position = None 
 
-    cap = cv2.VideoCapture(path)
-
-    # debug
-    num_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-    start_time = time.time()
+    cap = cv2.VideoCapture(0)
 
     with md_pose.Pose(
         min_detection_confidence = 0.7,
@@ -34,10 +27,13 @@ def count_pushup(path):
             imlist = []
 
             if result.pose_landmarks:
-                for id, lm in enumerate(result.pose_landmarks.landmark):
-                    h, w, _ = image.shape
-                    X, Y = int(lm.x * w), int(lm.y * h)
-                    imlist.append([id, X, Y])
+                draw_landmarks(
+                    md_pose,
+                    image,
+                    result.pose_landmarks,
+                    [11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28],
+                    imlist
+                )
 
             if len(imlist) != 0:
                 right = abs(imlist[constant.RIGHT_SHOULDER][2] - imlist[constant.RIGHT_ELBOW][2])
@@ -51,22 +47,10 @@ def count_pushup(path):
                     count +=1 
                     print(count)
 
-    # debug
-    end_time = time.time()
-    time_taken = end_time - start_time
-    fps = num_frames / time_taken
-    time_per_frame = time_taken / num_frames * 1000
-
-    print(f'Process time: {time_taken:.2f}')
-    print(f'Frames per second: {fps:.2f}')
-    print(f'Time per frame: {time_per_frame:.2f} ms')
+            cv2.imshow('Workout Scanner', cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
 
     cap.release()
+    cv2.destroyAllWindows()
     return count
-
-
-def speedup_video(old, new):
-    clip = VideoFileClip(old)
-    final = clip.fx(vfx.speedx, constant.SPEED_UP_THRESHOLD)
-    final.write_videofile(new)
-    return 
