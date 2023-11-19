@@ -28,15 +28,15 @@ def count_squat(imlist):
         left_hip = [imlist[constant.LEFT_HIP][1],
                     imlist[constant.LEFT_HIP][2]]
         left_knee = [imlist[constant.LEFT_KNEE][1],
-                      imlist[constant.LEFT_KNEE][2]]
+                        imlist[constant.LEFT_KNEE][2]]
         left_ankle = [imlist[constant.LEFT_ANKLE][1],
-                      imlist[constant.LEFT_ANKLE][2]]
+                        imlist[constant.LEFT_ANKLE][2]]
         right_hip = [imlist[constant.RIGHT_HIP][1],
-                    imlist[constant.RIGHT_HIP][2]]
+                        imlist[constant.RIGHT_HIP][2]]
         right_knee = [imlist[constant.RIGHT_KNEE][1],
-                      imlist[constant.RIGHT_KNEE][2]]
+                        imlist[constant.RIGHT_KNEE][2]]
         right_ankle = [imlist[constant.RIGHT_ANKLE][1],
-                      imlist[constant.LEFT_ANKLE][2]]
+                        imlist[constant.LEFT_ANKLE][2]]
 
         result.left_angle = calculate_angle(left_hip, left_knee, left_ankle)
         result.right_angle = calculate_angle(right_hip, right_knee, right_ankle)
