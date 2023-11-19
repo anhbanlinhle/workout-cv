@@ -36,16 +36,7 @@ def process_data(path):
                 )
 
             if len(imlist) != 0:
-                right = abs(imlist[constant.RIGHT_SHOULDER][2] - imlist[constant.RIGHT_ELBOW][2])
-                left = abs(imlist[constant.LEFT_SHOULDER][2] - imlist[constant.LEFT_ELBOW][2])
-                if ((left) >= constant.DOWN_HAND_THRESHOLD 
-                and (right) >= constant.DOWN_HAND_THRESHOLD):
-                    position = "down"
-                if ((left) <= constant.UP_HAND_THRESHOLD 
-                and (right) <= constant.UP_HAND_THRESHOLD) and position == "down":
-                    position = "up"
-                    count +=1 
-                    print(count)
+                print(count)
 
             cv2.imshow('Workout Scanner', cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
             if cv2.waitKey(1) & 0xFF == ord('q'):
