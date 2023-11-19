@@ -1,9 +1,5 @@
 import cv2
 import mediapipe as md
-import time
-
-from moviepy.editor import VideoFileClip
-import moviepy.video.fx.all as vfx
 import constant
 
 def process_data(path):
