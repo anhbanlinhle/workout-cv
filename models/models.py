@@ -1,9 +1,12 @@
 import cv2
 import mediapipe as md
 import constant
-from drawing import draw_landmarks
 
-def process_data(path):
+from drawing import draw_landmarks
+from pushup import count_push_up
+from squat import count_squat
+
+def process_data(path, algorithm):
     md_pose = md.solutions.pose 
 
     count = 0
@@ -36,6 +39,26 @@ def process_data(path):
                 )
 
             if len(imlist) != 0:
+                if algorithm == "pushup":
+                    angle = count_push_up(imlist)
+                    if  ((angle[0]) <= constant.SEW_THRESHOLD and (angle[1]) <= constant.SEW_THRESHOLD and
+                        ((angle[2]) >= constant.SHK_THRESHOLD and (angle[3]) >= constant.SHK_THRESHOLD) and 
+                        ((angle[4]) >= constant.HKA_THRESHOLD and (angle[5]) >= constant.HKA_THRESHOLD) ):
+                        position = "down"  
+                    if (((angle[0]) >= constant.SEW_THRESHOLD and (angle[1]) >= constant.SEW_THRESHOLD) and
+                        ((angle[2]) >= constant.SHK_THRESHOLD and (angle[3]) >= constant.SHK_THRESHOLD) and
+                        ((angle[4]) >= constant.HKA_THRESHOLD and (angle[5]) >= constant.HKA_THRESHOLD) and position == "down"):
+                        count +=1
+                        print(count)
+                        position = "up"
+                elif algorithm == "squat":
+                    result = count_squat(imlist)
+                    if result.left_angle > 160 and result.right_angle > 160 and stage == 'up':
+                        stage = 'down'
+                    if result.left_angle < 75 and result.right_angle < 75 and stage == 'down':
+                        count += 1
+                        print(count)
+                        stage = 'up'
                 print(count)
 
             cv2.imshow('Workout Scanner', cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
