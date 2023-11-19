@@ -40,6 +40,12 @@ def process_data(path):
                     X, Y = int(lm.x * w), int(lm.y * h)
                     imlist.append([id, X, Y])
 
+                md.solutions.drawing_utils.draw_landmarks(
+                    image,
+                    result.pose_landmarks,
+                    md_pose.POSE_CONNECTIONS
+                )
+
             if len(imlist) != 0:
                 right = abs(imlist[constant.RIGHT_SHOULDER][2] - imlist[constant.RIGHT_ELBOW][2])
                 left = abs(imlist[constant.LEFT_SHOULDER][2] - imlist[constant.LEFT_ELBOW][2])
