@@ -27,24 +27,12 @@ def process_data(path):
             imlist = []
 
             if result.pose_landmarks:
-                for id, lm in enumerate(result.pose_landmarks.landmark):
-                    h, w, _ = image.shape
-                    X, Y = int(lm.x * w), int(lm.y * h)
-                    imlist.append([id, X, Y])
-
-                md.solutions.drawing_utils.draw_landmarks(
+                draw_landmarks(
+                    md_pose,
                     image,
                     result.pose_landmarks,
-                    md_pose.POSE_CONNECTIONS,
-                    landmark_drawing_spec = md.solutions.drawing_utils.DrawingSpec(
-                        color=(0, 0, 0), 
-                        thickness=4, 
-                        circle_radius=5
-                    ),
-                    connection_drawing_spec = md.solutions.drawing_utils.DrawingSpec(
-                        color=(255, 255, 255),
-                        thickness=4
-                    ),
+                    [11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28],
+                    imlist
                 )
 
             if len(imlist) != 0:
@@ -66,3 +54,38 @@ def process_data(path):
     cap.release()
     cv2.destroyAllWindows()
     return count
+
+def draw_landmarks(md_pose, image, landmarks, landmark_indices, imlist):
+    # for id in landmark_indices:
+    #     lm = landmarks.landmark[id]
+    #     h, w, _ = image.shape
+    #     X, Y = int(lm.x * w), int(lm.y * h)
+    #     imlist.append([id, X, Y])
+    for id, lm in enumerate(landmarks.landmark):
+        h, w, _ = image.shape
+        X, Y = int(lm.x * w), int(lm.y * h)
+        imlist.append([id, X, Y])
+
+    for connection in md_pose.POSE_CONNECTIONS:
+        start_landmark = connection[0]
+        end_landmark = connection[1]
+
+        if start_landmark in landmark_indices and end_landmark in landmark_indices:
+            start_point = (int(landmarks.landmark[start_landmark].x * w), int(landmarks.landmark[start_landmark].y * h))
+            end_point = (int(landmarks.landmark[end_landmark].x * w), int(landmarks.landmark[end_landmark].y * h))
+
+            cv2.line(image, start_point, end_point, 
+                color=(255, 255, 255), 
+                thickness=4
+            )
+
+    for id in landmark_indices:
+        lm = landmarks.landmark[id]
+        h, w, _ = image.shape
+        X, Y = int(lm.x * w), int(lm.y * h)
+
+        cv2.circle(image, (X, Y), 
+            radius = 5, 
+            color = (0, 0, 0), 
+            thickness = 4
+        )
