@@ -1,5 +1,5 @@
 import numpy as np
-import constant
+import utils.constant
 
 class Result:
     def __init__(self):

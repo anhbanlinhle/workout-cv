@@ -7,9 +7,9 @@ from models.camera import process_data
 
 def main():
     parser = argparse.ArgumentParser(description='Pose Detection and Exercise Recognition')
-    parser.add_argument('--input', choices=['video', 'camera'], required=True, help='Input source (video or camera)')
-    parser.add_argument('--algorithm', choices=['squat', 'pushup'], required=True, help='Exercise recognition algorithm')
-    parser.add_argument('--source', help='Absolute path to the video file (required if input is video)')
+    parser.add_argument('-I', '--input', choices=['video', 'camera'], required=True, help='Input source (video or camera)')
+    parser.add_argument('-A', '--algorithm', choices=['squat', 'pushup'], required=True, help='Exercise recognition algorithm')
+    parser.add_argument('-S', '--source', help='Absolute path to the video file (required if input is video)')
 
     args = parser.parse_args()
 

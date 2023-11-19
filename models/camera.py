@@ -1,6 +1,6 @@
 import cv2
 import mediapipe as md
-import constant
+import utils.constant
 
 from utils.drawing import draw_landmarks
 from models.pushup import count_push_up
