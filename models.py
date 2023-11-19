@@ -70,10 +70,3 @@ def process_data(path):
     cap.release()
     cv2.destroyAllWindows()
     return count
-
-
-def speedup_video(old, new):
-    clip = VideoFileClip(old)
-    final = clip.fx(vfx.speedx, constant.SPEED_UP_THRESHOLD)
-    final.write_videofile(new)
-    return 
