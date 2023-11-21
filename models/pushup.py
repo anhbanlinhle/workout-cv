@@ -1,17 +1,17 @@
 import numpy as np
 import utils.constant
-# from constant import RIGHT_SHOULDER
-# from constant import RIGHT_ELBOW
-# from constant import RIGHT_WRIST
-# from constant import RIGHT_HIP
-# from constant import RIGHT_KNEE
-# from constant import RIGHT_ANKLE
-# from constant import LEFT_SHOULDER
-# from constant import LEFT_ELBOW
-# from constant import LEFT_WRIST
-# from constant import LEFT_HIP
-# from constant import LEFT_KNEE
-# from constant import LEFT_ANKLE
+from utils.constant import RIGHT_SHOULDER
+from utils.constant import RIGHT_ELBOW
+from utils.constant import RIGHT_WRIST
+from utils.constant import RIGHT_HIP
+from utils.constant import RIGHT_KNEE
+from utils.constant import RIGHT_ANKLE
+from utils.constant import LEFT_SHOULDER
+from utils.constant import LEFT_ELBOW
+from utils.constant import LEFT_WRIST
+from utils.constant import LEFT_HIP
+from utils.constant import LEFT_KNEE
+from utils.constant import LEFT_ANKLE
 def getAngle(a, b, c):
     a = np.array(a)  # First
     b = np.array(b)  # Mid
