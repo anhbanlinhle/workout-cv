@@ -21,9 +21,9 @@ def main():
         video_path = 0
 
     if args.algorithm == 'squat':
-        process_data(video_path, "squat")
+        print(process_data(video_path, "squat"))
     elif args.algorithm == 'pushup':
-        process_data(video_path, "pushup")
+        print(process_data(video_path, "pushup"))
     else:
         print('Invalid algorithm specified. Please choose "squat" or "pushup".')
 
