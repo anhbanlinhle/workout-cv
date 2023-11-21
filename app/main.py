@@ -21,12 +21,12 @@ def main():
     if args.input == 'video':
         if args.source is None:
             parser.error('--source is required when input is video')
-        print(process_camera(args.source, args.algorithm))
+        print(process_camera(speedup_video(args.source), args.algorithm))
     elif args.input == 'camera':
         if args.test is None:
             print(process_camera(0, args.algorithm))
         else:
-            print(process_camera(speedup_video(args.test), args.algorithm))
+            print(process_camera(args.test, args.algorithm))
 
 if __name__ == "__main__":
     main()
