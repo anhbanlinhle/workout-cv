@@ -4,6 +4,7 @@ import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from models.camera import process_camera
+from models.video import process_video
 from utils.optimizer import speedup_video
 
 def main():
@@ -21,7 +22,7 @@ def main():
     if args.input == 'video':
         if args.source is None:
             parser.error('--source is required when input is video')
-        print(process_camera(speedup_video(args.source), args.algorithm))
+        print(process_video(speedup_video(args.source), args.algorithm))
     elif args.input == 'camera':
         if args.test is None:
             print(process_camera(0, args.algorithm))
