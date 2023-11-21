@@ -3,7 +3,7 @@ import sys
 import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from models.camera import process_data
+from models.camera import process_camera
 
 def main():
     parser = argparse.ArgumentParser(description='Pose Detection and Exercise Recognition')
@@ -13,19 +13,16 @@ def main():
 
     args = parser.parse_args()
 
+    if args.algorithm not in ['squat', 'pushup']:
+        print('Invalid algorithm specified. Please choose "squat" or "pushup".')
+
     if args.input == 'video':
         if args.source is None:
             parser.error('--source is required when input is video')
-        video_path = args.source
+        print(process_camera(args.source, args.algorithm))
     elif args.input == 'camera':
-        video_path = 0
+        print(process_camera(0, args.algorithm))
 
-    if args.algorithm == 'squat':
-        print(process_data(video_path, "squat"))
-    elif args.algorithm == 'pushup':
-        print(process_data(video_path, "pushup"))
-    else:
-        print('Invalid algorithm specified. Please choose "squat" or "pushup".')
 
 if __name__ == "__main__":
     main()

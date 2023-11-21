@@ -11,7 +11,7 @@ from utils.constant import SEW_THRESHOLD
 from utils.constant import SHK_THRESHOLD
 from utils.constant import HKA_THRESHOLD
 
-def process_data(path, algorithm):
+def process_camera(path, algorithm):
     md_pose = md.solutions.pose 
 
     count = 0
