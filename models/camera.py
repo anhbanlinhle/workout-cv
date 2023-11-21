@@ -5,6 +5,11 @@ import utils.constant
 from utils.drawing import draw_landmarks
 from models.pushup import count_push_up
 from models.squat import count_squat
+import utils.constant
+
+from utils.constant import SEW_THRESHOLD
+from utils.constant import SHK_THRESHOLD
+from utils.constant import HKA_THRESHOLD
 
 def process_data(path, algorithm):
     md_pose = md.solutions.pose 
@@ -12,7 +17,7 @@ def process_data(path, algorithm):
     count = 0
     position = None 
 
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(path)
 
     with md_pose.Pose(
         min_detection_confidence = 0.7,
@@ -41,13 +46,13 @@ def process_data(path, algorithm):
             if len(imlist) != 0:
                 if algorithm == "pushup":
                     angle = count_push_up(imlist)
-                    if  ((angle[0]) <= constant.SEW_THRESHOLD and (angle[1]) <= constant.SEW_THRESHOLD and
-                        ((angle[2]) >= constant.SHK_THRESHOLD and (angle[3]) >= constant.SHK_THRESHOLD) and 
-                        ((angle[4]) >= constant.HKA_THRESHOLD and (angle[5]) >= constant.HKA_THRESHOLD) ):
+                    if  ((angle[0]) <= SEW_THRESHOLD and (angle[1]) <= SEW_THRESHOLD and
+                        ((angle[2]) >= SHK_THRESHOLD and (angle[3]) >= SHK_THRESHOLD) and 
+                        ((angle[4]) >= HKA_THRESHOLD and (angle[5]) >= HKA_THRESHOLD) ):
                         position = "down"  
-                    if (((angle[0]) >= constant.SEW_THRESHOLD and (angle[1]) >= constant.SEW_THRESHOLD) and
-                        ((angle[2]) >= constant.SHK_THRESHOLD and (angle[3]) >= constant.SHK_THRESHOLD) and
-                        ((angle[4]) >= constant.HKA_THRESHOLD and (angle[5]) >= constant.HKA_THRESHOLD) and position == "down"):
+                    if (((angle[0]) >= SEW_THRESHOLD and (angle[1]) >= SEW_THRESHOLD) and
+                        ((angle[2]) >= SHK_THRESHOLD and (angle[3]) >= SHK_THRESHOLD) and
+                        ((angle[4]) >= HKA_THRESHOLD and (angle[5]) >= HKA_THRESHOLD) and position == "down"):
                         count +=1
                         print(count)
                         position = "up"
