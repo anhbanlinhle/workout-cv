@@ -4,6 +4,7 @@ import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from models.camera import process_camera
+from utils.optimizer import speedup_video
 
 def main():
     parser = argparse.ArgumentParser(description='Pose Detection and Exercise Recognition')
@@ -25,7 +26,7 @@ def main():
         if args.test is None:
             print(process_camera(0, args.algorithm))
         else:
-            print(process_camera(args.test, args.algorithm))
+            print(process_camera(speedup_video(args.test), args.algorithm))
 
 if __name__ == "__main__":
     main()

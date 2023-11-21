@@ -18,3 +18,5 @@ HKA_THRESHOLD = 150
 # squat threshold
 UP_SQUAT_THRESHOLD = 160
 DOWN_SQUAT_THRESHOLD = 90
+# optimizer threshold
+OPTIMIZE_THRESHOLD = 2
