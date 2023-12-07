@@ -68,7 +68,7 @@ def count_squat(imlist):
         result.back_angle = calculate_angle(
             mid_hip, vert_shoulder, mid_shoulder)
         
-        visiblity_arr = [imlist[LEFT_HIP][3], imlist[LEFT_KNEE][3], imlist[LEFT_ANKLE][3], imlist[RIGHT_HIP][3], imlist[RIGHT_KNEE][3], imlist[RIGHT_ANKLE][3]]
+        visiblity_arr = [imlist[LEFT_HIP][3], imlist[LEFT_KNEE][3], imlist[LEFT_ANKLE][3], imlist[RIGHT_HIP][3], imlist[RIGHT_KNEE][3], imlist[RIGHT_ANKLE][3], imlist[LEFT_SHOULDER][3], imlist[LEFT_SHOULDER][3]]
         
         result.visibility = check_visibility(visiblity_arr)
 

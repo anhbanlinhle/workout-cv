@@ -26,6 +26,13 @@ def getAngle(a, b, c):
 
     return angle
 
+def check_visibility(arr):
+    for x in arr:
+        if x < 0.8:
+            return False
+    
+    return True
+
 # SEW - Shoulder Elbow Wrist
 # SHK - Shoulder Hip Knee
 # HKA - Hip Knee Ankle
@@ -63,4 +70,13 @@ def count_push_up(imlist):
                                         (imlist[RIGHT_KNEE][1],imlist[RIGHT_KNEE][2]),
                                         (imlist[RIGHT_ANKLE][1],imlist[RIGHT_ANKLE][2]))
         angle.append(HKA_right)
+        
+    
+        visibility_arr = [imlist[LEFT_SHOULDER][1], imlist[LEFT_ELBOW][1], imlist[LEFT_WRIST][1],
+                          imlist[RIGHT_SHOULDER][1], imlist[RIGHT_ELBOW][1], imlist[RIGHT_WRIST][1],
+                          imlist[LEFT_HIP][1], imlist[LEFT_KNEE][1], imlist[LEFT_ANKLE][1],
+                          imlist[RIGHT_HIP][1], imlist[RIGHT_KNEE][1], imlist[RIGHT_ANKLE][1]]
+        
+        visibility = check_visibility(visibility_arr)
+        angle.append(visibility)
     return angle
