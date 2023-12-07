@@ -7,11 +7,15 @@ from utils.constant import LEFT_ANKLE
 from utils.constant import RIGHT_HIP
 from utils.constant import RIGHT_KNEE
 from utils.constant import RIGHT_ANKLE
+from utils.constant import RIGHT_SHOULDER
+from utils.constant import LEFT_SHOULDER
+
 
 class Result:
     def __init__(self):
         self.left_angle = 0.0
         self.right_angle = 0.0
+
 
 def calculate_angle(a, b, c):
     a = np.array(a)  # First
@@ -36,27 +40,32 @@ def check_visibility(arr):
 
 
 def count_squat(imlist):
-    
+
     result = Result()
     if len(imlist) != 0:
         left_hip = [imlist[LEFT_HIP][1],
                     imlist[LEFT_HIP][2]]
         left_knee = [imlist[LEFT_KNEE][1],
-                        imlist[LEFT_KNEE][2]]
+                     imlist[LEFT_KNEE][2]]
         left_ankle = [imlist[LEFT_ANKLE][1],
-                        imlist[LEFT_ANKLE][2]]
+                      imlist[LEFT_ANKLE][2]]
         right_hip = [imlist[RIGHT_HIP][1],
-                        imlist[RIGHT_HIP][2]]
+                     imlist[RIGHT_HIP][2]]
         right_knee = [imlist[RIGHT_KNEE][1],
-                        imlist[RIGHT_KNEE][2]]
+                      imlist[RIGHT_KNEE][2]]
         right_ankle = [imlist[RIGHT_ANKLE][1],
-                        imlist[RIGHT_ANKLE][2]]
+                       imlist[LEFT_ANKLE][2]]
+        mid_shoulder = [(imlist[RIGHT_SHOULDER][1]+imlist[LEFT_SHOULDER][1])/2,
+                        (imlist[RIGHT_SHOULDER][2]+imlist[LEFT_SHOULDER][2])/2]
+        vert_shoulder = [(imlist[RIGHT_SHOULDER][1]+imlist[LEFT_SHOULDER][1])/2,
+                         0]
+        mid_hip = [(imlist[RIGHT_HIP][1]+imlist[LEFT_HIP][1])/2,
+                   (imlist[RIGHT_HIP][2]+imlist[LEFT_HIP][2])/2]
 
         result.left_angle = calculate_angle(left_hip, left_knee, left_ankle)
-        result.right_angle = calculate_angle(right_hip, right_knee, right_ankle)
-        
-        visiblity_arr = [imlist[LEFT_HIP][3], imlist[LEFT_KNEE][3], imlist[LEFT_ANKLE][3], imlist[RIGHT_HIP][3], imlist[RIGHT_KNEE][3], imlist[RIGHT_ANKLE][3]]
-        
-        result.visibility = check_visibility(visiblity_arr)
+        result.right_angle = calculate_angle(
+            right_hip, right_knee, right_ankle)
+        result.back_angle = calculate_angle(
+            mid_hip, vert_shoulder, mid_shoulder)
 
         return result
