@@ -1,6 +1,13 @@
 import numpy as np
 import utils.constant
 
+from utils.constant import LEFT_HIP
+from utils.constant import LEFT_KNEE
+from utils.constant import LEFT_ANKLE
+from utils.constant import RIGHT_HIP
+from utils.constant import RIGHT_KNEE
+from utils.constant import RIGHT_ANKLE
+
 class Result:
     def __init__(self):
         self.left_angle = 0.0
@@ -25,18 +32,18 @@ def count_squat(imlist):
     
     result = Result()
     if len(imlist) != 0:
-        left_hip = [imlist[constant.LEFT_HIP][1],
-                    imlist[constant.LEFT_HIP][2]]
-        left_knee = [imlist[constant.LEFT_KNEE][1],
-                        imlist[constant.LEFT_KNEE][2]]
-        left_ankle = [imlist[constant.LEFT_ANKLE][1],
-                        imlist[constant.LEFT_ANKLE][2]]
-        right_hip = [imlist[constant.RIGHT_HIP][1],
-                        imlist[constant.RIGHT_HIP][2]]
-        right_knee = [imlist[constant.RIGHT_KNEE][1],
-                        imlist[constant.RIGHT_KNEE][2]]
-        right_ankle = [imlist[constant.RIGHT_ANKLE][1],
-                        imlist[constant.LEFT_ANKLE][2]]
+        left_hip = [imlist[LEFT_HIP][1],
+                    imlist[LEFT_HIP][2]]
+        left_knee = [imlist[LEFT_KNEE][1],
+                        imlist[LEFT_KNEE][2]]
+        left_ankle = [imlist[LEFT_ANKLE][1],
+                        imlist[LEFT_ANKLE][2]]
+        right_hip = [imlist[RIGHT_HIP][1],
+                        imlist[RIGHT_HIP][2]]
+        right_knee = [imlist[RIGHT_KNEE][1],
+                        imlist[RIGHT_KNEE][2]]
+        right_ankle = [imlist[RIGHT_ANKLE][1],
+                        imlist[LEFT_ANKLE][2]]
 
         result.left_angle = calculate_angle(left_hip, left_knee, left_ankle)
         result.right_angle = calculate_angle(right_hip, right_knee, right_ankle)
