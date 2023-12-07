@@ -58,7 +58,7 @@ def process_camera(path, algorithm):
                             position = "up"
                 elif algorithm == "squat":
                     result = count_squat(imlist)
-                    if(result.back_angle < 20 and result.visibility == True):
+                    if(result.back_angle < 20 and result.visibility):
                         if result.left_angle > 160 and result.right_angle > 160:
                             position = 'down'
                         if result.left_angle < 75 and result.right_angle < 75 and position == 'down':
