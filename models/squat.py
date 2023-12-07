@@ -27,6 +27,13 @@ def calculate_angle(a, b, c):
 
     return angle
 
+def check_visibility(arr):
+    for x in arr:
+        if x < 0.8:
+            return False
+    
+    return True
+
 
 def count_squat(imlist):
     
@@ -43,9 +50,13 @@ def count_squat(imlist):
         right_knee = [imlist[RIGHT_KNEE][1],
                         imlist[RIGHT_KNEE][2]]
         right_ankle = [imlist[RIGHT_ANKLE][1],
-                        imlist[LEFT_ANKLE][2]]
+                        imlist[RIGHT_ANKLE][2]]
 
         result.left_angle = calculate_angle(left_hip, left_knee, left_ankle)
         result.right_angle = calculate_angle(right_hip, right_knee, right_ankle)
+        
+        visiblity_arr = [imlist[LEFT_HIP][3], imlist[LEFT_KNEE][3], imlist[LEFT_ANKLE][3], imlist[RIGHT_HIP][3], imlist[RIGHT_KNEE][3], imlist[RIGHT_ANKLE][3]]
+        
+        result.visibility = check_visibility(visiblity_arr)
 
         return result

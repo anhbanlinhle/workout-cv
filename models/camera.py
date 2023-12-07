@@ -20,8 +20,9 @@ def process_camera(path, algorithm):
     cap = cv2.VideoCapture(path)
 
     with md_pose.Pose(
-        min_detection_confidence = 0.7,
-        min_tracking_confidence = 0.7
+        model_complexity=2,
+        min_detection_confidence = 0.9,
+        min_tracking_confidence = 0.9
     ) as pose:
         while cap.isOpened():
             success, image = cap.read()
@@ -57,6 +58,7 @@ def process_camera(path, algorithm):
                         position = "up"
                 elif algorithm == "squat":
                     result = count_squat(imlist)
+                    print(result.visibility)
                     if result.left_angle > 160 and result.right_angle > 160:
                         position = 'down'
                     if result.left_angle < 75 and result.right_angle < 75 and position == 'down':

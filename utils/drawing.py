@@ -5,7 +5,7 @@ def draw_landmarks(md_pose, image, landmarks, landmark_indices, imlist):
     for id, lm in enumerate(landmarks.landmark):
         h, w, _ = image.shape
         X, Y = int(lm.x * w), int(lm.y * h)
-        imlist.append([id, X, Y])
+        imlist.append([id, X, Y, lm.visibility])
 
     for connection in md_pose.POSE_CONNECTIONS:
         start_landmark = connection[0]
