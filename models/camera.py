@@ -34,6 +34,7 @@ def process_camera(path, algorithm):
                 print('Video not found or ended')
                 break
             
+            # convert color and flip image
             image = cv2.cvtColor(cv2.flip(image, 1), cv2.COLOR_BGR2RGB)
 
             # get pose landmarks as result using mediapipe pose model
