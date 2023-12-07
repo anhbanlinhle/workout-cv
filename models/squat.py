@@ -31,6 +31,19 @@ def calculate_angle(a, b, c):
 
     return angle
 
+def check_visibility(left, right):
+    left_v = True
+    right_v = True
+    for x in left:
+        if x < 0.8:
+            left_v = False
+    
+    for x in right:
+        if x < 0.8:
+            right_v = False
+
+    return left_v or right_v
+
 
 def count_squat(imlist):
 
@@ -47,7 +60,7 @@ def count_squat(imlist):
         right_knee = [imlist[RIGHT_KNEE][1],
                       imlist[RIGHT_KNEE][2]]
         right_ankle = [imlist[RIGHT_ANKLE][1],
-                       imlist[LEFT_ANKLE][2]]
+                       imlist[RIGHT_ANKLE][2]]
         mid_shoulder = [(imlist[RIGHT_SHOULDER][1]+imlist[LEFT_SHOULDER][1])/2,
                         (imlist[RIGHT_SHOULDER][2]+imlist[LEFT_SHOULDER][2])/2]
         vert_shoulder = [(imlist[RIGHT_SHOULDER][1]+imlist[LEFT_SHOULDER][1])/2,
@@ -60,5 +73,11 @@ def count_squat(imlist):
             right_hip, right_knee, right_ankle)
         result.back_angle = calculate_angle(
             mid_hip, vert_shoulder, mid_shoulder)
+        
+        visibility_left = [imlist[LEFT_HIP][3], imlist[LEFT_KNEE][3], imlist[LEFT_ANKLE][3], imlist[LEFT_SHOULDER][3]]
+        visibility_right = [imlist[RIGHT_HIP][3], imlist[RIGHT_KNEE][3], imlist[RIGHT_ANKLE][3], imlist[RIGHT_SHOULDER][3]]
+        
+        
+        result.visibility = check_visibility(visibility_left, visibility_right)
 
         return result

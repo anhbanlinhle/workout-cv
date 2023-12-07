@@ -23,8 +23,8 @@ def process_video(path, algorithm):
 
     # init pose instance with confidence threshold
     with md_pose.Pose(
-        min_detection_confidence = 0.7,
-        min_tracking_confidence = 0.7
+        min_detection_confidence = 0.9,
+        min_tracking_confidence = 0.9
     ) as pose:
         # process video frame by frame
         while cap.isOpened():
@@ -58,19 +58,20 @@ def process_video(path, algorithm):
                 if algorithm == "pushup":
                     # count push up using push up algorithm
                     angle = count_push_up(imlist)
-                    if  ((angle[0]) <= SEW_THRESHOLD and (angle[1]) <= SEW_THRESHOLD and
-                        ((angle[2]) >= SHK_THRESHOLD and (angle[3]) >= SHK_THRESHOLD) and 
-                        ((angle[4]) >= HKA_THRESHOLD and (angle[5]) >= HKA_THRESHOLD) ):
-                        position = "down"  
-                    if (((angle[0]) >= SEW_THRESHOLD and (angle[1]) >= SEW_THRESHOLD) and
-                        ((angle[2]) >= SHK_THRESHOLD and (angle[3]) >= SHK_THRESHOLD) and
-                        ((angle[4]) >= HKA_THRESHOLD and (angle[5]) >= HKA_THRESHOLD) and position == "down"):
-                        count +=1
-                        position = "up"
+                    if(angle[6]):
+                        if  ((angle[0]) <= SEW_THRESHOLD and (angle[1]) <= SEW_THRESHOLD and
+                            ((angle[2]) >= SHK_THRESHOLD and (angle[3]) >= SHK_THRESHOLD) and 
+                            ((angle[4]) >= HKA_THRESHOLD and (angle[5]) >= HKA_THRESHOLD) ):
+                            position = "down"  
+                        if (((angle[0]) >= SEW_THRESHOLD and (angle[1]) >= SEW_THRESHOLD) and
+                            ((angle[2]) >= SHK_THRESHOLD and (angle[3]) >= SHK_THRESHOLD) and
+                            ((angle[4]) >= HKA_THRESHOLD and (angle[5]) >= HKA_THRESHOLD) and position == "down"):
+                            count +=1
+                            position = "up"
                 elif algorithm == "squat":
                     # count squat using squat algorithm
                     result = count_squat(imlist)
-                    if(result.back_angle < 20):
+                    if(result.back_angle < 20 and result.visibility):
                         if result.left_angle > 160 and result.right_angle > 160:
                             position = 'down'
                         if result.left_angle < 75 and result.right_angle < 75 and position == 'down':
