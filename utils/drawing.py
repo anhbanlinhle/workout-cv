@@ -8,8 +8,8 @@ def draw_landmarks(md_pose, image, landmarks, landmark_indices, imlist):
         h, w, _ = image.shape
         # normalize landmark position to screen size
         X, Y = int(lm.x * w), int(lm.y * h)
-        # append landmark id, normalized x, and y to imlist
-        imlist.append([id, X, Y])
+
+        imlist.append([id, X, Y, lm.visibility])
 
     # loop through each connection in pose model
     for connection in md_pose.POSE_CONNECTIONS:
