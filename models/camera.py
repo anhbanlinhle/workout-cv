@@ -71,11 +71,13 @@ def process_camera(path, algorithm):
                 elif algorithm == "squat":
                     # count squat using squat algorithm
                     result = count_squat(imlist)
-                    if result.left_angle > 160 and result.right_angle > 160:
-                        position = 'down'
-                    if result.left_angle < 75 and result.right_angle < 75 and position == 'down':
-                        count += 1
-                        position = 'up'
+                    print(result.back_angle)
+                    if(result.back_angle < 20):
+                        if result.left_angle > 160 and result.right_angle > 160:
+                            position = 'down'
+                        if result.left_angle < 75 and result.right_angle < 75 and position == 'down':
+                            count += 1
+                            position = 'up'
 
             # display count on screen
             cv2.putText(image, f'Count: {count}', (10, 60), cv2.FONT_HERSHEY_COMPLEX, 2, (255, 255, 255), 2)
