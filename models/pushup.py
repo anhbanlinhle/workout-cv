@@ -76,6 +76,16 @@ def count_push_up(imlist):
                                         (imlist[RIGHT_KNEE][1],imlist[RIGHT_KNEE][2]),
                                         (imlist[RIGHT_ANKLE][1],imlist[RIGHT_ANKLE][2]))
         angle.append(HKA_right)
+
+        mid_shoulder = [(imlist[RIGHT_SHOULDER][1]+imlist[LEFT_SHOULDER][1])/2,
+                        (imlist[RIGHT_SHOULDER][2]+imlist[LEFT_SHOULDER][2])/2]
+        vert_shoulder = [0, (imlist[RIGHT_HIP][2]+imlist[LEFT_HIP][2])/2]
+        mid_hip = [(imlist[RIGHT_HIP][1]+imlist[LEFT_HIP][1])/2,
+                   (imlist[RIGHT_HIP][2]+imlist[LEFT_HIP][2])/2]
+
+        vert_angle = getAngle(vert_shoulder, mid_hip, mid_shoulder)
+
+        angle.append(vert_angle)
         
     
         visibility_left = [imlist[LEFT_SHOULDER][1], imlist[LEFT_ELBOW][1], imlist[LEFT_WRIST][1], imlist[LEFT_HIP][1], imlist[LEFT_KNEE][1], imlist[LEFT_ANKLE][1]]
