@@ -59,7 +59,7 @@ def process_camera(path, algorithm):
                 if algorithm == "pushup":
                     # count push up using push up algorithm
                     angle = count_push_up(imlist)
-                    if(angle[6]):
+                    if(angle[7] and 150 < angle[6]):
                         if  ((angle[0]) <= SEW_THRESHOLD and (angle[1]) <= SEW_THRESHOLD and
                             ((angle[2]) >= SHK_THRESHOLD and (angle[3]) >= SHK_THRESHOLD) and 
                             ((angle[4]) >= HKA_THRESHOLD and (angle[5]) >= HKA_THRESHOLD) ):
